@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Commit Messages As Documentation</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="reveal.js/css/reveal.css" rel="stylesheet"><link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme"><link href="reveal.js/lib/css/zenburn.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script></head><body><div class="reveal"><div class="slides"><section class="title"><h1>Commit Messages As Documentation</h1></section><section><section><div class="listingblock"><div class="content"><pre class="highlight"><code class="python language-python">def make_roast_beef(beef, oven):
+    ...
+    beef.chop_off_ends()
+    beef.marinate()
+    oven.roast(beef)</code></pre></div></div></section><section><div class="listingblock"><div class="content"><pre class="highlight"><code class="python language-python">def make_roast_beef(beef, oven):
+    ...
+    beef.chop_off_ends() # cut beef to fit oven pan
+    beef.marinate()
+    oven.roast(beef)</code></pre></div></div></section><section><div class="paragraph"><p>Update make_roast_beef</p></div></section></section>
+<section id="_today_s_talk"><h2>Today&#8217;s talk</h2><div class="ulist"><ul><li><p>Using commits as documentation</p></li><li><p>How to write good commits</p><div class="ulist"><ul><li><p>Atomic, coherent commits</p></li><li><p>Meaningful commit messages</p></li><li><p>Clean commit history</p></li></ul></div></li></ul></div></section>
+<section id="_commit_messages_as_documentation"><h2>Commit messages as documentation</h2><div class="ulist"><ul><li class="fragment"><p>summarise changes</p></li><li class="fragment"><p>provide context: when, who, why</p></li><li class="fragment"><p>don&#8217;t become outdated</p></li><li class="fragment"><p>searchable</p></li></ul></div></section>
+<section><section><div class="paragraph"><p>Let&#8217;s say one day, you used git blame and discovered the commit that caused the bug&#8230;&#8203;</p></div></section><section><div class="paragraph"><p>&#8230;&#8203;and discovered the commit was 1000 lines long, including 3 new features</p></div></section><section><div class="paragraph"><p>&#8230;&#8203;not that useful, is it?</p></div></section><section id="_atomic"><h2>Atomic</h2><div class="paragraph"><p>Only one logical change</p></div>
+<div class="ulist"><ul><li><p>whitespace fixes, refactorings separate from functional changes</p></li><li><p>different features</p></li></ul></div></section><section id="_atomic_commits_are_easier_to"><h2>Atomic commits are easier to&#8230;&#8203;</h2><div class="ulist"><ul><li><p>review, debug, revert</p></li></ul></div></section><section id="_coherent"><h2>Coherent</h2><div class="paragraph"><p>Commits should not break build</p></div>
+<div class="ulist"><ul><li><p>test updates in the same commit</p></li><li><p>code works as is</p></li></ul></div></section><section id="_coherent_commits"><h2>Coherent commits</h2><div class="ulist"><ul><li><p>allow you to use git blame, git bisect etc.</p></li></ul></div></section></section>
+<section id="_commit_messages"><h2>Commit messages</h2><div class="ulist"><ul><li class="fragment"><p>summary of code changes</p></li><li class="fragment"><p>provide context behind the code change</p></li><li class="fragment"><p>make sense without seeing code diffs &amp; external resources</p></li><li class="fragment"><p>consistent, correct spelling</p></li><li class="fragment"><p>correct formatting for readability</p></li></ul></div></section>
+<section><section id="_summary"><h2>Summary</h2><div class="paragraph"><p>Explain what the commit does</p></div><div class="ulist"><ul><li><p>headlines: a summary</p></li><li><p>make clear which part of code is affected</p><div class="ulist"><ul><li><p>use type/scope: fix(DevGuide): add missing blank line</p></li></ul></div></li></ul></div></section><section id="_summary_describe_the_change"><h2>Summary: describe the change</h2><div class="paragraph"><p>Fix login bug &#8594; Redirect user to the requested page after login</p></div></section><section><div class="ulist"><ul><li><p>fix bug</p></li><li><p>add badge, add section numbers</p></li><li><p>Set up CI</p></li></ul></div></section><section><div class="ulist"><ul><li><p>Redirect user to the requested page after login</p></li><li><p>Add section numbers to Dev Guide</p></li><li><p>Add AppVeyor Badge</p></li><li><p>Set up AppVeyor CI</p></li></ul></div></section></section>
+<section><section id="_description"><h2>Description</h2><div class="ulist"><ul><li><p>Why is the change needed?</p></li><li><p>How does the commit solve the issue?</p></li><li><p>Why did you choose this approach?</p></li><li><p>What are the side effects?</p></li><li><p>What are the limitations?</p></li><li><p>Useful references: useful resources, past commits, bug tracker</p></li><li><p>Giving credit/acknowledgements</p></li></ul></div></section><section id="_why_is_the_change_needed"><h2>Why is the change needed?</h2><div class="ulist"><ul><li><p>fix bug</p></li><li><p>improve performance</p></li><li><p>enhance feature</p></li></ul></div></section><section><div class="ulist"><ul><li><p>Redirect user to the requested page after login</p><div class="ulist"><ul><li><p>Users were being redirected to the home page after login, which is less
+useful than redirecting to the page they had originally requested before
+being redirected to the login form.</p></li></ul></div></li><li><p>Set up AppVeyor CI</p><div class="ulist"><ul><li><p>AppVeyor[1] is a continuous integration service used to build and test
+projects on a Windows VM. Adding AppVeyor support to this project will
+allow us to easily ensure that our tests do not break on Windows.</p></li></ul></div></li></ul></div></section><section id="_how_does_the_commit_solve_the_issue"><h2>How does the commit solve the issue?</h2><div class="ulist"><ul><li><p>high level overview of code changes</p></li></ul></div></section><section><div class="ulist"><ul><li><p>Fix bug that occurs when latest commit is authored using <code>git-pair</code></p><div class="ulist"><ul><li><p>This commit fixes this bug by checking if the required commit author information is available first before trying to access it.</p></li></ul></div></li></ul></div></section><section id="_why_did_you_choose_this_approach"><h2>Why did you choose this approach?</h2><div class="ulist"><ul><li><p>tradeoffs</p></li><li><p>alternatives</p><div class="ulist"><ul><li><p>difficulties faced</p></li></ul></div></li></ul></div></section><section id="_what_are_the_side_effectst"><h2>What are the side effectst?</h2><div class="ulist"><ul><li><p>impact on performance</p></li><li><p>impact on other features</p></li><li><p>breaks build?</p></li></ul></div></section><section id="_what_are_the_limitations"><h2>What are the limitations?</h2><div class="ulist"><ul><li><p>known limitations</p></li><li><p>future scope for improvement</p></li></ul></div></section><section><div class="ulist"><ul><li><p>Set Up AppVeyor CI</p><div class="ulist"><ul><li><p>For now, we will run our tests with 64-bit Java only, since the project
+does not use any native libraries and thus is unlikely to have any
+architecture-specific bugs. In the future, should we use any native
+libraries, the appveyor.yml file should be updated to run our tests on
+both 32-bit and 64-bit Java.</p></li></ul></div></li></ul></div></section><section id="_other_info"><h2>Other info</h2><div class="ulist"><ul><li><p>useful references: resources, bug tracker etc.</p></li><li><p>credits/acknowledgements</p></li></ul></div></section></section>
+<section><section id="_clean_history"><h2>Clean history</h2><div class="ulist"><ul><li><p>include only what is relevant</p></li><li><p>rebase</p></li></ul></div></section><section><div class="ulist"><ul><li><p>fix typo</p></li><li><p>fix extra whitespace</p></li><li><p>change url for help</p></li></ul></div></section><section><div class="ulist"><ul><li><p>Update URL of help window</p></li></ul></div></section></section>
+<section id="_write_better_commits"><h2>Write better commits</h2><div class="paragraph"><p>Good commits &amp; useful commit messages</p></div>
+<div class="ulist"><ul><li><p>make it easier to stay updated on changes in the project</p></li><li><p>makes debugging easier by documenting the context of code changes</p></li><li><p>improves quality of your code by forcing you to think through your decisions</p></li></ul></div></section></div></div><script src="reveal.js/lib/js/head.min.js"></script><script src="reveal.js/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: true,
+  // Display a presentation progress bar
+  progress: true,
+  // Display the page number of the current slide
+  slideNumber: false,
+  // Push each slide change to the browser history
+  history: false,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: false,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'black',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'slide',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'default',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'fade',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 960,
+  height: 700,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      
+      { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+  ]
+});</script></body></html>
